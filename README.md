@@ -4,7 +4,7 @@ Comparison of L1, L2, dropout, and data augmentation using a fully connected neu
 
 ## Usage
 
-Open `Assignment_4_Raisin_Colab.ipynb` in Google Colab and run all cells.
+[Open Colab](https://colab.research.google.com/drive/1fTHbJuzeeDmGsiC_0nvED-nDB-1mc69d?usp=sharing) and run all cells.
 
 ## Dataset
 
