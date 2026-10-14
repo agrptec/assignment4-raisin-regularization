@@ -4,7 +4,7 @@ Comparison of L1, L2, dropout, and data augmentation using a fully connected neu
 
 ## Usage
 
-[Open Colab](https://colab.research.google.com/drive/1fTHbJuzeeDmGsiC_0nvED-nDB-1mc69d?usp=sharing) and run all cells.
+[Open Colab](https://colab.research.google.com/drive/1x7yWQ3DPAKz2Wt7rOROlk_OL0ySUkbsg?usp=sharing) and run all cells.
 
 ## Dataset
 
