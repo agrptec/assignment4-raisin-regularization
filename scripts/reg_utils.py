@@ -334,3 +334,55 @@ def load_2D_dataset():
     plt.scatter(train_X[0, :], train_X[1, :], c=train_Y, s=40, cmap=plt.cm.Spectral);
     
     return train_X, train_Y, test_X, test_Y
+
+def plot_decision_boundary_pca(parameters, X, Y, resolution=250):
+    """
+    Plot a 2D PCA slice of the decision boundary of a model
+    trained on standardized, higher-dimensional features.
+
+    X: (n_features, m)
+    Y: (1, m)
+    """
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.decomposition import PCA
+
+    pca = PCA(n_components=2)
+    X_2d = pca.fit_transform(X.T)
+
+    margin = 0.15
+    x_min, x_max = X_2d[:, 0].min() - margin, X_2d[:, 0].max() + margin
+    y_min, y_max = X_2d[:, 1].min() - margin, X_2d[:, 1].max() + margin
+
+    xx, yy = np.meshgrid(
+        np.linspace(x_min, x_max, resolution),
+        np.linspace(y_min, y_max, resolution)
+    )
+
+    grid_2d = np.c_[xx.ravel(), yy.ravel()]
+
+    # Reconstruct grid points in the original feature space.
+    grid_original = pca.inverse_transform(grid_2d).T
+
+    predictions = predict_dec(parameters, grid_original)
+    predictions = np.asarray(predictions).reshape(xx.shape)
+
+    plt.contourf(
+        xx, yy, predictions,
+        levels=[-0.5, 0.5, 1.5],
+        colors=["#82cda7", "#ff915a"],
+        alpha=1
+    )
+
+    plt.scatter(
+        X_2d[:, 0],
+        X_2d[:, 1],
+        c=Y.ravel(),
+        cmap=plt.cm.coolwarm,
+        edgecolors="none",
+        s=30
+    )
+
+    plt.xlabel("PC1")
+    plt.ylabel("PC2")
+    plt.tight_layout()
